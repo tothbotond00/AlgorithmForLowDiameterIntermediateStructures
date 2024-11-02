@@ -61,8 +61,9 @@ class Plane:
         return direction01, direction02, direction03, direction04, direction05, direction06
     
     def placeTile(self):
-        self.tiles[self.actor.getPosition().getX()][self.actor.getPosition().getY()] = True
-        self.actor.hasTile = False
+        if self.actor.hasTile:
+            self.tiles[self.actor.getPosition().getX()][self.actor.getPosition().getY()] = True
+            self.actor.hasTile = False
 
     def pickupTile(self):
         self.tiles[self.actor.getPosition().getX()][self.actor.getPosition().getY()] = False
@@ -101,6 +102,9 @@ class Plane:
                 direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                 actorPosition = self.actor.getPosition()
 
+                if(self.getTile(actorPosition.getX(),actorPosition.getY()) == False):
+                    return
+
                 newPosition01 = actorPosition.mix(direction01.value)
                 newPosition02 = actorPosition.mix(direction02.value)
                 newPosition03 = actorPosition.mix(direction05.value)
@@ -111,7 +115,7 @@ class Plane:
                         self.actor.move(direction01.value)
                         drawer.draw_hex_grid(ax, self)
                         plt.draw()
-                        plt.pause(1)
+                        plt.pause(0.5)
                         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                         actorPosition = self.actor.getPosition()
                         newPosition01 = actorPosition.mix(direction01.value)
@@ -124,7 +128,7 @@ class Plane:
 
                         drawer.draw_hex_grid(ax, self)
                         plt.draw()
-                        plt.pause(1)
+                        plt.pause(0.5)
                         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                         actorPosition = self.actor.getPosition()
                         newPosition01 = actorPosition.mix(direction01.value)
@@ -141,7 +145,7 @@ class Plane:
                             self.actor.move(direction01.value)
                         drawer.draw_hex_grid(ax, self)
                         plt.draw()
-                        plt.pause(1)
+                        plt.pause(0.5)
                         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                         actorPosition = self.actor.getPosition()
                         newPosition01 = actorPosition.mix(direction01.value)
@@ -160,22 +164,22 @@ class Plane:
                     self.actor.move(direction02.value)
                     drawer.draw_hex_grid(ax, self)
                     plt.draw()
-                    plt.pause(1)
+                    plt.pause(0.5)
                 elif(self.getTile(newPosition02.getX(),newPosition02.getY()) == True):
                     self.actor.move(direction03.value)
                     drawer.draw_hex_grid(ax, self)
                     plt.draw()
-                    plt.pause(1)
+                    plt.pause(0.5)
                 elif(self.getTile(newPosition03.getX(),newPosition03.getY()) == True):
                     self.actor.move(direction04.value)
                     drawer.draw_hex_grid(ax, self)
                     plt.draw()
-                    plt.pause(1)
+                    plt.pause(0.5)
 
 
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(1)
+            plt.pause(0.5)
 
 
     def buildPar(self, ax, drawer):
@@ -188,23 +192,40 @@ class Plane:
             newPosition01 = actorPosition.mix(direction06.value)
             newPosition02 = actorPosition.mix(direction03.value)
             newPosition03 = actorPosition.mix(direction04.value)
-            newPosition04 = actorPosition.mix(direction05.value)
+            newPosition04 = actorPosition.mix(direction01.value)
             if(self.firstColumn and self.getTile(newPosition01.getX(),newPosition01.getY()) == True):
                 self.actor.move(direction06.value)
+                return
             elif(self.getTile(newPosition02.getX(),newPosition02.getY()) == True and self.getTile(newPosition03.getX(),newPosition03.getY()) == False):
                 self.actor.move(direction04.value)
+                drawer.draw_hex_grid(ax, self)
+                plt.draw()
+                plt.pause(0.5)
+
+                direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
+                actorPosition = self.actor.getPosition()
+
                 self.placeTile()
                 self.actor.move(direction05.value)
+                return
             elif(self.getTile(newPosition04.getX(),newPosition04.getY()) == True and self.getTile(newPosition03.getX(),newPosition03.getY()) == True and self.getTile(newPosition02.getX(),newPosition02.getY()) == False):
                 self.actor.move(direction03.value)
+                drawer.draw_hex_grid(ax, self)
+                plt.draw()
+                plt.pause(0.5)
+
+                direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
+                actorPosition = self.actor.getPosition()
+
                 self.placeTile()
                 self.actor.move(direction06.value)
+                return
             else:
                 self.actor.move(direction02.value)
 
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(1)
+            plt.pause(0.5)
 
         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
         actorPosition = self.actor.getPosition()
@@ -217,16 +238,16 @@ class Plane:
             self.actor.move(direction01.value)
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(1)
+            plt.pause(0.5)
         elif(self.getTile(newPosition02.getX(),newPosition02.getY()) == True):
             self.actor.move(direction03.value)
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(1)
+            plt.pause(0.5)
             self.actor.move(direction01.value)
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(1)
+            plt.pause(0.5)
 
             self.firstColumn = False
             while(self.getTile(actorPosition.getX(),actorPosition.getY()) == True):
@@ -245,7 +266,7 @@ class Plane:
 
                         drawer.draw_hex_grid(ax, self)
                         plt.draw()
-                        plt.pause(1)
+                        plt.pause(0.5)
 
                         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                         actorPosition = self.actor.getPosition()
@@ -255,16 +276,18 @@ class Plane:
 
                         drawer.draw_hex_grid(ax, self)
                         plt.draw()
-                        plt.pause(1)
+                        plt.pause(0.5)
 
                         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                         actorPosition = self.actor.getPosition()
                         newPosition02 = actorPosition.mix(direction05.value)
+
+                    return
                 else:
                     self.actor.move(direction01.value)
                     drawer.draw_hex_grid(ax, self)
                     plt.draw()
-                    plt.pause(1)
+                    plt.pause(0.5)
 
             direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
             actorPosition = self.actor.getPosition()
@@ -275,15 +298,17 @@ class Plane:
                 self.placeTile()
                 drawer.draw_hex_grid(ax, self)
                 plt.draw()
-                plt.pause(1)
+                plt.pause(0.5)
 
             else:
                 self.actor.move(direction02.value)
                 drawer.draw_hex_grid(ax, self)
                 plt.draw()
-                plt.pause(1)
+                plt.pause(0.5)
 
                 self.buildPar(ax, drawer)
+
+        return
 
 
 

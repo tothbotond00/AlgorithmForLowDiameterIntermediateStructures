@@ -4,7 +4,7 @@ class Actor:
     position = coordinate.Coordiante(0,0)
     
     # Does the actor carry a tile?
-    hasTile = False
+    hasTile = True
     
     def __init__(self, x, y):
         self.position = coordinate.Coordiante(x,y)
