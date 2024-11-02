@@ -127,7 +127,9 @@ class Plane:
                         plt.pause(1)
                         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                         actorPosition = self.actor.getPosition()
+                        newPosition01 = actorPosition.mix(direction01.value)
                         newPosition02 = actorPosition.mix(direction02.value)
+                        newPosition03 = actorPosition.mix(direction05.value)
                         newPosition04 = actorPosition.mix(direction06.value)
 
                     while(self.getTile(newPosition01.getX(),newPosition01.getY()) == True or self.getTile(newPosition03.getX(),newPosition03.getY()) == True or self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
