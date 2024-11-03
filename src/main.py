@@ -23,25 +23,7 @@ start_button = Button(start_ax, 'Start')
 
 # Function to start the animation
 def start(event):
-    # global aniFirst
-    # if aniFirst is None:  # Start the animation if it hasn't started yet
-    #     aniFirst = animation.FuncAnimation(
-    #         fig, animate, fargs=(ax, plane), interval=1000, blit=False, cache_frame_data=False
-    #     )
-    #     print("Animation started")
-    #     plt.draw()
-
-    drawer.draw_hex_grid(ax, plane)
     plane.moveActor(ax, drawer)
-
-    
-
-# def buildPar():
-#     plane.buildPar()
-#     drawer.draw_hex_grid(ax, plane)
-
-# Function to update the animation
-# def animate(frame, ax, plane):
 
 # Attach the button click event to start the animation
 start_button.on_clicked(start)
