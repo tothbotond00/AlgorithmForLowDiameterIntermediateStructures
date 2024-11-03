@@ -1,10 +1,11 @@
+import time
 import actor
 import coordinate
 import matplotlib.pyplot as plt
 
 
 class Plane:
-    actor = actor.Actor(0,0)
+    actor = actor.Actor(0,0, 0.3)
     tiles = []
     x = 0
     y = 0
@@ -30,7 +31,7 @@ class Plane:
                     #If two then it is a simple tile with the actor
                     if line[j] != '\n' and int(line[j]) == 2:
                         self.tiles[j][i] = True
-                        self.actor = actor.Actor(j,i)
+                        self.actor = actor.Actor(j,i, 0.3)
                 i += 1
 
         self.firstColumn = True
@@ -67,6 +68,14 @@ class Plane:
         self.tiles[self.actor.getPosition().getX()][self.actor.getPosition().getY()] = False
         self.actor.hasTile = True
     
+    def addTime(self):
+        self.actor.changeTime(0.1)
+
+    def subTime(self):
+        self.actor.changeTime(-0.1)
+
+
+
     # Moves the Actor to the proper coordinate based on a random direction (For testing purpose only)
     def moveActor(self, ax, drawer):
 

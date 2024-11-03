@@ -1,8 +1,5 @@
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import numpy as np
 from matplotlib.widgets import Button
-import matplotlib.animation as animation
 import plane
 import sys
 import drawer
@@ -17,16 +14,30 @@ plane = plane.Plane(GRID_HEIGHT,GRID_WIDTH,filename)
 
 # Set up the plot with a button for starting the animation
 fig, ax = plt.subplots()
-plt.subplots_adjust(bottom=0.2)
-start_ax = plt.axes([0.7, 0.05, 0.1, 0.075])
-start_button = Button(start_ax, 'Start')
+plt.subplots_adjust(bottom=0.115, top=1, )
+slower_button = Button(plt.axes([0.7, 0.05, 0.1, 0.075]), 'Slower')
+quit_button = Button(plt.axes([0.81, 0.05, 0.1, 0.075]), 'Quit', color='#b38181')
+faster_button = Button(plt.axes([0.59, 0.05, 0.1, 0.075]), 'Faster')
+start_button = Button(plt.axes([0.48, 0.05, 0.1, 0.075]), 'Start', color='#81b38d')
 
 # Function to start the animation
 def start(event):
     plane.moveActor(ax, drawer)
 
+def addTime(event):
+    plane.addTime()
+
+def subTime(event):
+    plane.subTime()
+
+def quit(event):
+    sys.exit()
+
 # Attach the button click event to start the animation
 start_button.on_clicked(start)
+slower_button.on_clicked(addTime)
+faster_button.on_clicked(subTime)
+quit_button.on_clicked(quit)
 
 # Draw the initial grid
 drawer.draw_hex_grid(ax, plane)
