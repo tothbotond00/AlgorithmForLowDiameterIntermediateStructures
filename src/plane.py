@@ -104,82 +104,85 @@ class Plane:
 
                 if(self.getTile(actorPosition.getX(),actorPosition.getY()) == False):
                     return
+                elif(self.actor.hasTile == False):
+                    newPosition01 = actorPosition.mix(direction01.value)
+                    newPosition02 = actorPosition.mix(direction02.value)
+                    newPosition03 = actorPosition.mix(direction05.value)
+                    newPosition04 = actorPosition.mix(direction06.value)
 
-                newPosition01 = actorPosition.mix(direction01.value)
-                newPosition02 = actorPosition.mix(direction02.value)
-                newPosition03 = actorPosition.mix(direction05.value)
-                newPosition04 = actorPosition.mix(direction06.value)
-
-                if(self.firstColumn == True):
-                    while(self.getTile(newPosition01.getX(),newPosition01.getY()) == True):
-                        self.actor.move(direction01.value)
-                        drawer.draw_hex_grid(ax, self)
-                        plt.draw()
-                        plt.pause(0.5)
-                        direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
-                        actorPosition = self.actor.getPosition()
-                        newPosition01 = actorPosition.mix(direction01.value)
-                else:
-                    while(self.getTile(newPosition02.getX(),newPosition02.getY()) == True or self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
-                        if(self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
-                            self.actor.move(direction06.value)
-                        elif(self.getTile(newPosition02.getX(),newPosition02.getY()) == True):
-                            self.actor.move(direction02.value)
-
-                        drawer.draw_hex_grid(ax, self)
-                        plt.draw()
-                        plt.pause(0.5)
-                        direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
-                        actorPosition = self.actor.getPosition()
-                        newPosition01 = actorPosition.mix(direction01.value)
-                        newPosition02 = actorPosition.mix(direction02.value)
-                        newPosition03 = actorPosition.mix(direction05.value)
-                        newPosition04 = actorPosition.mix(direction06.value)
-
-                    while(self.getTile(newPosition01.getX(),newPosition01.getY()) == True or self.getTile(newPosition03.getX(),newPosition03.getY()) == True or self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
-                        if(self.getTile(newPosition03.getX(),newPosition03.getY()) == True):
-                            self.actor.move(direction05.value)
-                        elif(self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
-                            self.actor.move(direction06.value)
-                        elif(self.getTile(newPosition01.getX(),newPosition01.getY()) == True):
+                    if(self.firstColumn == True):
+                        while(self.getTile(newPosition01.getX(),newPosition01.getY()) == True):
                             self.actor.move(direction01.value)
+                            drawer.draw_hex_grid(ax, self)
+                            plt.draw()
+                            plt.pause(0.3)
+                            direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
+                            actorPosition = self.actor.getPosition()
+                            newPosition01 = actorPosition.mix(direction01.value)
+                    else:
+                        while(self.getTile(newPosition02.getX(),newPosition02.getY()) == True or self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
+                            if(self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
+                                self.actor.move(direction06.value)
+                            elif(self.getTile(newPosition02.getX(),newPosition02.getY()) == True):
+                                self.actor.move(direction02.value)
+
+                            drawer.draw_hex_grid(ax, self)
+                            plt.draw()
+                            plt.pause(0.3)
+                            direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
+                            actorPosition = self.actor.getPosition()
+                            newPosition01 = actorPosition.mix(direction01.value)
+                            newPosition02 = actorPosition.mix(direction02.value)
+                            newPosition03 = actorPosition.mix(direction05.value)
+                            newPosition04 = actorPosition.mix(direction06.value)
+
+                        while(self.getTile(newPosition01.getX(),newPosition01.getY()) == True or self.getTile(newPosition03.getX(),newPosition03.getY()) == True or self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
+                            if(self.getTile(newPosition03.getX(),newPosition03.getY()) == True):
+                                self.actor.move(direction05.value)
+                            elif(self.getTile(newPosition04.getX(),newPosition04.getY()) == True):
+                                self.actor.move(direction06.value)
+                            elif(self.getTile(newPosition01.getX(),newPosition01.getY()) == True):
+                                self.actor.move(direction01.value)
+                            drawer.draw_hex_grid(ax, self)
+                            plt.draw()
+                            plt.pause(0.3)
+                            direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
+                            actorPosition = self.actor.getPosition()
+                            newPosition01 = actorPosition.mix(direction01.value)
+                            newPosition03 = actorPosition.mix(direction05.value)
+                            newPosition04 = actorPosition.mix(direction06.value)
+
+                    direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
+                    actorPosition = self.actor.getPosition()
+
+                    newPosition01 = actorPosition.mix(direction02.value)
+                    newPosition02 = actorPosition.mix(direction03.value)
+                    newPosition03 = actorPosition.mix(direction04.value)
+
+                    self.pickupTile()
+                    drawer.draw_hex_grid(ax, self)
+                    plt.draw()
+                    plt.pause(0.3)
+                    if(self.getTile(newPosition01.getX(),newPosition01.getY()) == True):
+                        self.actor.move(direction02.value)
                         drawer.draw_hex_grid(ax, self)
                         plt.draw()
-                        plt.pause(0.5)
-                        direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
-                        actorPosition = self.actor.getPosition()
-                        newPosition01 = actorPosition.mix(direction01.value)
-                        newPosition03 = actorPosition.mix(direction05.value)
-                        newPosition04 = actorPosition.mix(direction06.value)
-
-                direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
-                actorPosition = self.actor.getPosition()
-
-                newPosition01 = actorPosition.mix(direction02.value)
-                newPosition02 = actorPosition.mix(direction03.value)
-                newPosition03 = actorPosition.mix(direction04.value)
-
-                self.pickupTile()
-                if(self.getTile(newPosition01.getX(),newPosition01.getY()) == True):
-                    self.actor.move(direction02.value)
-                    drawer.draw_hex_grid(ax, self)
-                    plt.draw()
-                    plt.pause(0.5)
-                elif(self.getTile(newPosition02.getX(),newPosition02.getY()) == True):
-                    self.actor.move(direction03.value)
-                    drawer.draw_hex_grid(ax, self)
-                    plt.draw()
-                    plt.pause(0.5)
-                elif(self.getTile(newPosition03.getX(),newPosition03.getY()) == True):
-                    self.actor.move(direction04.value)
-                    drawer.draw_hex_grid(ax, self)
-                    plt.draw()
-                    plt.pause(0.5)
+                        plt.pause(0.3)
+                    elif(self.getTile(newPosition02.getX(),newPosition02.getY()) == True):
+                        self.actor.move(direction03.value)
+                        drawer.draw_hex_grid(ax, self)
+                        plt.draw()
+                        plt.pause(0.3)
+                    elif(self.getTile(newPosition03.getX(),newPosition03.getY()) == True):
+                        self.actor.move(direction04.value)
+                        drawer.draw_hex_grid(ax, self)
+                        plt.draw()
+                        plt.pause(0.3)
 
 
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(0.5)
+            plt.pause(0.3)
 
 
     def buildPar(self, ax, drawer):
@@ -200,7 +203,7 @@ class Plane:
                 self.actor.move(direction04.value)
                 drawer.draw_hex_grid(ax, self)
                 plt.draw()
-                plt.pause(0.5)
+                plt.pause(0.3)
 
                 direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                 actorPosition = self.actor.getPosition()
@@ -212,7 +215,7 @@ class Plane:
                 self.actor.move(direction03.value)
                 drawer.draw_hex_grid(ax, self)
                 plt.draw()
-                plt.pause(0.5)
+                plt.pause(0.3)
 
                 direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                 actorPosition = self.actor.getPosition()
@@ -225,7 +228,7 @@ class Plane:
 
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(0.5)
+            plt.pause(0.3)
 
         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
         actorPosition = self.actor.getPosition()
@@ -238,16 +241,16 @@ class Plane:
             self.actor.move(direction01.value)
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(0.5)
+            plt.pause(0.3)
         elif(self.getTile(newPosition02.getX(),newPosition02.getY()) == True):
             self.actor.move(direction03.value)
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(0.5)
+            plt.pause(0.3)
             self.actor.move(direction01.value)
             drawer.draw_hex_grid(ax, self)
             plt.draw()
-            plt.pause(0.5)
+            plt.pause(0.3)
 
             self.firstColumn = False
             while(self.getTile(actorPosition.getX(),actorPosition.getY()) == True):
@@ -266,7 +269,7 @@ class Plane:
 
                         drawer.draw_hex_grid(ax, self)
                         plt.draw()
-                        plt.pause(0.5)
+                        plt.pause(0.3)
 
                         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                         actorPosition = self.actor.getPosition()
@@ -276,7 +279,7 @@ class Plane:
 
                         drawer.draw_hex_grid(ax, self)
                         plt.draw()
-                        plt.pause(0.5)
+                        plt.pause(0.3)
 
                         direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
                         actorPosition = self.actor.getPosition()
@@ -287,7 +290,7 @@ class Plane:
                     self.actor.move(direction01.value)
                     drawer.draw_hex_grid(ax, self)
                     plt.draw()
-                    plt.pause(0.5)
+                    plt.pause(0.3)
 
             direction01, direction02, direction03, direction04, direction05, direction06 = self.getDirections()
             actorPosition = self.actor.getPosition()
@@ -298,13 +301,13 @@ class Plane:
                 self.placeTile()
                 drawer.draw_hex_grid(ax, self)
                 plt.draw()
-                plt.pause(0.5)
+                plt.pause(0.3)
 
             else:
                 self.actor.move(direction02.value)
                 drawer.draw_hex_grid(ax, self)
                 plt.draw()
-                plt.pause(0.5)
+                plt.pause(0.3)
 
                 self.buildPar(ax, drawer)
 
