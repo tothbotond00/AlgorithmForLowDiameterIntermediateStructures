@@ -246,10 +246,13 @@ class Plane:
 
         return
 
-
-
-
-
-            
-    
-                
+    def printState(self):
+        return_string = ""
+        for i in range(self.x):
+            for j in range(self.y):
+                if(self.tiles[j][i]) == True :
+                    return_string += "1"
+                else:
+                    return_string += "0"
+            return_string += "\n"
+        return return_string
