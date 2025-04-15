@@ -1,9 +1,10 @@
 import plane_console as plane
 import sys
+import os
 
 response_string = "steps,steps_tile,tiles,moved_tiles\n"
 
-for i in range(100):
+for i in range(1000):
     try:
         # Parameters for the hexagon grid
         GRID_WIDTH = int(sys.argv[1])
@@ -19,9 +20,14 @@ for i in range(100):
         steps_tile = str(step_counter[1])
         tiles = str(tile_counter[0])
         moved_tiles = str(moved_tiles_counter[0])
-        response_string += steps + ',' + steps_tile + ',' + tiles + ',' + moved_tiles + "\n"
+        state = ""
+        state = plane2.printState()
+        file_path = os.path.join('tests100icycle', str(i) + ".txt")
+        with open(file_path, "w") as file:
+            file.write(state)
+            file.close()
     except Exception as e:
         pass
-        #print(i)
+        print(e)
 
 print(response_string)

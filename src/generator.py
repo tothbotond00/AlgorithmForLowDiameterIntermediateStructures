@@ -2,7 +2,7 @@ import numpy as np
 import random
 import os
 
-def generate_more_random_hexagons(size=30, ones_count=25):
+def generate_more_random_hexagons(size=200, ones_count=100):
     """
     Generate a matrix with a random connected shape, ensuring exactly `ones_count` connected 1's and one 2.
     """
@@ -72,4 +72,4 @@ def write_matrix_to_file(matrix, directory="tests", filename="1.txt"):
 # Generate a random shape matrix and write it to a file
 for i in range(100):
     random_shape_matrix = generate_more_random_hexagons()
-    file_path = write_matrix_to_file(random_shape_matrix, directory="tests", filename=str(i)+".txt")
+    file_path = write_matrix_to_file(random_shape_matrix, directory="tests100", filename=str(i)+".txt")

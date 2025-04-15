@@ -17,7 +17,7 @@ class Plane:
             self.tiles.append(helper)
             
         # Open the file in read mode
-        with open(f'./tests/{filename}', 'r') as file:
+        with open(f'./tests100/{filename}', 'r') as file:
         # Iterate through each line in the file
             i = 0
             for line in file:
@@ -255,4 +255,7 @@ class Plane:
                 else:
                     return_string += "0"
             return_string += "\n"
+        for i in range(self.x):
+            for j in range(self.y):
+                self.tiles[j][i] = False
         return return_string

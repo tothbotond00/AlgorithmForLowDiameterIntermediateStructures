@@ -1,1 +1,10 @@
 src/__pycache__
+scripts/tests25/*
+scripts/tests25icycle/*
+scripts/tests50/*
+scripts/tests50icycle/*
+scripts/tests100/*
+scripts/tests100icycle/*
+src/tests25/
+src/tests50/
+src/tests100/
